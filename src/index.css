@@ -12,10 +12,9 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
-  /* font-family: 'Roboto', sans-serif; */
-  padding: 25px 0;
+  font-family: 'Roboto', sans-serif;
   color: black;
-  font-family: "Times New Roman", Times, serif;
+  /* font-family: "Times New Roman", Times, serif; */
 }
 
 #root {
@@ -25,7 +24,7 @@ body {
   padding: 0 15px;
   /* background-color: aqua; */
   --main-color-line: #b9babc;
-  --main-bg-color: #F3F4F6;
+  --form-bg-color: #F3F4F6;
   --main-bg-black: #1F2937;
   --main-border-black: #1F2937;
   --main-bg-blue: #60A5FA;

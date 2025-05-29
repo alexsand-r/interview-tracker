@@ -1,11 +1,12 @@
-import { useState } from "react";
+//import { LoginGoogleForm } from "./components/login-google-form";
+
+import { Form } from "./components/fofm";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <h1 class="text-3xl font-bold underline text-amber-700">Hello world!</h1>
+      {/* <LoginGoogleForm /> */}
+      <Form />
     </>
   );
 }
