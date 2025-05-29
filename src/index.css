@@ -2,19 +2,39 @@
 
 
 
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #ffff;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:focus,
+:active {
+  outline: none;
 }
+
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  /* font-family: 'Roboto', sans-serif; */
+  padding: 25px 0;
+  color: black;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#root {
+  width: 100%;
+  /* max-width: 824px; */
+  max-width: 1000px;
+  padding: 0 15px;
+  /* background-color: aqua; */
+  --main-color-line: #b9babc;
+  --main-bg-color: #F3F4F6;
+  --main-bg-black: #1F2937;
+  --main-border-black: #1F2937;
+  --main-bg-blue: #60A5FA;
+}
+
+/* #F3F4F6 */
+/* bg-[var(--main-bg-color)] */
+/* bg-[var(--main-bg-black)] */
+/* border-[var(--main-border-black)] */
+/* bg-[var(--main-bg-blue)] */
 
 
