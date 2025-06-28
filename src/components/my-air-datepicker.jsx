@@ -1,12 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
 import AirDatepicker from "air-datepicker";
 import "air-datepicker/air-datepicker.css";
 
-export default function MyAirDatepicker({ onDateSelect }) {
+const MyAirDatepicker = forwardRef(({ onDateSelect, value }, ref) => {
   const inputRef = useRef(null);
+  const dpRef = useRef(null);
 
   useEffect(() => {
-    const dp = new AirDatepicker(inputRef.current, {
+    dpRef.current = new AirDatepicker(inputRef.current, {
       onSelect: ({ date }) => {
         onDateSelect && onDateSelect(date);
       },
@@ -14,8 +15,22 @@ export default function MyAirDatepicker({ onDateSelect }) {
       dateFormat: "dd.MM.yyyy",
     });
 
-    return () => dp.destroy(); // Очистка при размонтировании
+    return () => dpRef.current?.destroy();
   }, []);
+
+  // 🆕 Встановлюємо значення в input, коли value змінюється
+  useEffect(() => {
+    if (value && inputRef.current) {
+      inputRef.current.value = value;
+    }
+  }, [value]);
+
+  useImperativeHandle(ref, () => ({
+    clear: () => {
+      inputRef.current.value = "";
+      dpRef.current.clear();
+    },
+  }));
 
   return (
     <input
@@ -25,4 +40,6 @@ export default function MyAirDatepicker({ onDateSelect }) {
       className="w-full bg-gray-50 border-2 border-gray-200 rounded-lg pl-10 pr-8 p-1 focus:border-blue-500 focus:outline-2 focus:outline-blue-200 text-gray-900"
     />
   );
-}
+});
+
+export default MyAirDatepicker;

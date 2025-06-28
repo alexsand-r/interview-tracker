@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LoginGoogleForm } from "./components/login-google-form";
 
-import { Form } from "./components/fofm";
+import { Form } from "./components/form/form";
 import { InterviewList } from "./components/interview-list/interview-list";
 
 function App() {
   return (
     <>
+      {/* <LoginGoogleForm /> */}
       <Router basename="/">
         <Routes>
           {/* сторінка авторизації через гугл аккаунт */}

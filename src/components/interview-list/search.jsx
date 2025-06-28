@@ -1,17 +1,25 @@
 //-- search.jsx
 import search from "../../../public/search.svg";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import useStore from "../../store/store";
 
 export const Search = () => {
   const [inputValue, setInputValue] = useState("");
+  const setSearchText = useStore((state) => state.setSearchText);
+
+  const searchText = useStore((state) => state.searchText);
+
+  useEffect(() => {
+    setInputValue(searchText);
+  }, [searchText]);
 
   const handleSearchText = (e) => {
     const value = e.target.value;
     const trimmedValue = value.trimStart(); // не обрізаємо з кінця, щоб не заважати користувачу
     setInputValue(value); // оновлюємо значення в input
-    sessionStorage.setItem("searchText", trimmedValue); // зберігаємо в sessionStorage
-    console.log(trimmedValue);
+    setSearchText(trimmedValue); // оновлюю значення у сторе   searchText: "",
+    console.log("Значення у searchText:", trimmedValue); // ← тут лог
   };
 
   return (
