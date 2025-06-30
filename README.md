@@ -3,3 +3,5 @@
 npm run build
 
 firebase deploy
+
+Hosting URL: https://interview-tracker-9705d.web.app

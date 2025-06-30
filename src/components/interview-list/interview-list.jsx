@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
+import { UserInfo } from "./user-info";
 
 export const InterviewList = () => {
   const interviewArr = useStore((state) => state.interviewArr);
@@ -62,8 +63,12 @@ export const InterviewList = () => {
       <section className="mt-10">
         <div className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full z-10 bg-white">
           <div className="max-w-[991px] mx-auto px-[15px] mt-3">
-            <h1 className="text-2xl capitalize mb-4">my interview tracker</h1>
-            <div className=" flex flex-col gap-y-2  items-start sm:flex-row gap-x-5 mb-5">
+            <div className="flex flex-col sm:flex-row gap-2 items-center justify-between mb-4">
+              <h1 className="text-2xl capitalize">my interview tracker</h1>
+              <UserInfo />
+            </div>
+
+            <div className="flex flex-col gap-y-2  items-start sm:flex-row gap-x-5 mb-5">
               <ButtonAdd />
               <Search />
             </div>
@@ -90,7 +95,7 @@ export const InterviewList = () => {
               <div>{interview.date}</div>
               <div>{interview.company}</div>
               <div>{interview.statusInterview}</div>
-              <div>{interview.notes}</div>
+              <div className="text-left">{interview.notes}</div>
               <div className="flex items-center justify-center gap-x-5">
                 <button
                   className="cursor-pointer"
