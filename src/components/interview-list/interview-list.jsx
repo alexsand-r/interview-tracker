@@ -1,34 +1,49 @@
 //  interview-list.jsx
-
 import { ButtonAdd } from "./button-add";
 import { Search } from "./search";
 import pencilIcon from "../../../public/pencil.svg";
 import cross from "../../../public/cross.svg";
-import useStore from "../../store/store"; // імпортую useStore із сторе
+import useStore from "../../store/store";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
 
 export const InterviewList = () => {
-  const interviewArr = useStore((state) => state.interviewArr); // Отримуємо весь масив інтерв'ю для рендера на сторінці
-  const deleteInterview = useStore((state) => state.deleteInterview); // видаляю
-  const searchText = useStore((state) => state.searchText); //  додаю з сторе значення інпуту   searchText: "",
+  const interviewArr = useStore((state) => state.interviewArr);
+  const deleteInterview = useStore((state) => state.deleteInterview);
+  const searchText = useStore((state) => state.searchText);
+  const loadInterviews = useStore((state) => state.loadInterviews);
+  const setUserId = useStore((state) => state.setUserId);
 
-  // useEffect(() => {
-  //   console.log(interviewArr);
-  // }, [interviewArr]);
+  const navigate = useNavigate();
+  const setSelectedInterview = useStore((state) => state.setSelectedInterview);
 
-  // видаляю по ай ди
+  useEffect(() => {
+    // Відслідковуємо авторизацію користувача
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserId(user.uid);
+        loadInterviews(user.uid); // Завантажуємо інтерв’ю з Firestore для цього користувача
+      } else {
+        // Якщо користувач не авторизований — можна направити на сторінку логіну
+        navigate("/login");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const handleDelete = (id) => {
     deleteInterview(id);
     console.log("delete", id);
   };
-  const setSelectedInterview = useStore((state) => state.setSelectedInterview);
-  const navigate = useNavigate();
 
   const handleEdit = (interview) => {
-    setSelectedInterview(interview); // Зберігаємо вибраний запис
-    navigate("/form"); // Переходимо на форму редагування
+    setSelectedInterview(interview);
+    navigate("/form");
   };
+
   const filteredInterviews =
     searchText.trim() === ""
       ? interviewArr
