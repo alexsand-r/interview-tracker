@@ -84,7 +84,7 @@ export const InterviewList = () => {
           <div>action</div>
         </div>
         {/* interview-list */}
-        <ul className="mt-38 md:mt-0 mb-6 border-l border-r border-gray-300">
+        <ul className="mt-50 md:mt-0 mb-6 border-l border-r border-gray-300">
           {filteredInterviews.map((interview, index) => (
             <li
               key={interview.id}
@@ -92,10 +92,10 @@ export const InterviewList = () => {
                 index === 0 ? "border-t" : ""
               }`}
             >
-              <div>{interview.date}</div>
-              <div>{interview.company}</div>
-              <div>{interview.statusInterview}</div>
-              <div className="text-left">{interview.notes}</div>
+              <div className="text-left px-2">{interview.date}</div>
+              <div className="text-left px-2">{interview.company}</div>
+              <div className="text-left px-2">{interview.statusInterview}</div>
+              <div className="text-left px-2">{interview.notes}</div>
               <div className="flex items-center justify-center gap-x-5">
                 <button
                   className="cursor-pointer"
